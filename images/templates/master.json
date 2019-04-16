@@ -24,7 +24,7 @@
     },
     {
       "type": "shell",
-      "script": "../provisioners/install_postgres.sh"
+      "script": "../provisioners/common/install_postgres.sh"
     }
   ]
 }
