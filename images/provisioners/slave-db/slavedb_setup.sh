@@ -23,6 +23,7 @@ function update_postgres_config {
 
 function replace_postgres_main_dir {
   sudo systemctl stop postgresql
+
   # create ne main directory 
   sudo mv /var/lib/postgresql/9.6/main /var/lib/postgresql/9.6/main-bekup
   sudo mkdir /var/lib/postgresql/9.6/main/
