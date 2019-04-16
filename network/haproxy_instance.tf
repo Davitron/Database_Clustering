@@ -2,7 +2,7 @@ resource "google_compute_instance" "haproxy" {
   name         = "haproxy"
   machine_type = "${var.machine_type}"
   zone         = "europe-west1-b"
-  tags = ["public", "http-server"]
+  tags = ["http-server", "public"]
 
   boot_disk {
     initialize_params {
@@ -21,19 +21,8 @@ resource "google_compute_instance" "haproxy" {
     create_before_destroy   = true
   }
 
-  metadata {
-    master_ip = "${var.master_ip}"
-    slave1_ip = "${var.slave1_ip}"
-    slave2_ip =  "${var.slave2_ip}"
-  }
 
   metadata_startup_script = "${var.startup_scripts["haproxy"]}"
-
-  depends_on = [
-    "google_compute_instance.master",
-    "google_compute_instance.slave-one",
-    "google_compute_instance.slave-two"
-  ]
 
   service_account {
     scopes = ["cloud-platform"]

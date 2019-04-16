@@ -4,10 +4,10 @@ A project that demonstrates how to setup a multiple  PostgreSQL databases and lo
 #### HOW TO SET UP
 
 - Clone this repo
-- cd into the project
-- run `export PROJECT_ID="YOUR_GCP_PROJECT_ID" in the terminal
-- create a folder called `secrets` in the root directory of this project
-- get your service account key from GCP and place the json file in the folder 
+- Cd into the project
+- Run `export PROJECT_ID="YOUR_GCP_PROJECT_ID"` in the terminal
+- Create a folder called `secrets` in the root directory of this project
+- [Get your service account key from GCP](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) and place the json file in the folder( Ensure you have already created an [account]() and [project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) before you do so)
 
 ##### create images
 - cd into `/images/templates`
@@ -25,8 +25,16 @@ A project that demonstrates how to setup a multiple  PostgreSQL databases and lo
   ```
 
 ##### Create infrastructure
- - update the `variable.tf` file with your variables. The 3 images created earlier are also required in the file
- - run the following commands
+ - Update the `variable.tf` file with your variables. The 3 images created earlier are also required in the file.
+  The variables consist of the following:
+    - images of the Haproxy Load-Balancer, Master and Slave database created with Packer
+    - Image type for the NAT instance ( You should use `ubuntu-1604-xenial-v20181004` prefarably)
+    - IPV4 CIDR for the public and private subnet
+    - IP addresses for each instance ( Ensure that they are compatible CIDR specified for the subnet that houses them)
+    - Database Password for the master database
+    - The machine type (`f1-micro` seems efficient enough for the project)
+    - The region
+ - Run the following commands
     ```
       teraform init
       terraform plan

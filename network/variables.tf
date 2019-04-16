@@ -53,8 +53,8 @@ variable "startup_scripts" {
   type = "map"
   default = {
     nat = "sudo sysctl -w net.ipv4.ip_forward=1; sudo iptables -t nat -A POSTROUTING -o ens4 -j MASQUERADE"
-    haproxy = "cd /home/packer; sudo su - packer; sudo chmod +x haproxy.sh; bash haproxy.sh"
-    slave = "cd /home/packer; sudo su - packer; sudo chmod +x slave_config.sh; bash slavedb_setup.sh"
-    master = "cd /home/packer; sudo su - packer; sudo chmod +x slave_config.sh; bash masterdb_setup.sh"
+    haproxy = "sudo su - packer -c '. /home/packer/haproxy.sh'"
+    slave = "sudo su - packer -c '. /home/packer/slavedb_setup.sh'"
+    master = "sudo su - packer -c '. /home/packer/masterdb_setup.sh'"
   }
 }
